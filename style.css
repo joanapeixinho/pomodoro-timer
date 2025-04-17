@@ -95,6 +95,40 @@ html {
   button:hover {
     color: #854e57;
   }
-
-
+  
+  .settings-modal {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 10px;
+    width: 220px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: #854e57;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .settings-modal input {
+    width: 60px;
+    padding: 5px;
+    margin-top: 5px;
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  .settings-modal.hidden {
+    display: none;
+  }
+  
+  .btn-save-settings {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border: none;
+    background-color: #bf9ba1;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
   
