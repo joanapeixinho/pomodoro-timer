@@ -5,7 +5,7 @@ const resetBtn = document.querySelector('.btn-reset');
 const minuteDiv = document.querySelector('.minutes');
 const secondDiv = document.querySelector('.seconds');
 const settingsBtn = document.querySelector('.btn-settings');
-const settingsModal = document.querySelector('.settings-modal');
+const settingsModal = document.querySelector('.settings-overlay');
 const saveSettingsBtn = document.querySelector('.btn-save-settings');
 const sessionInput = document.getElementById('session-length');
 
@@ -62,6 +62,12 @@ settingsBtn.addEventListener('click', () => {
     }
   
     settingsModal.classList.toggle('hidden');
+  });
+
+  settingsModal.addEventListener('click', (e) => {
+    if (e.target === settingsModal) {
+      settingsModal.classList.add('hidden');
+    }
   });
   
   saveSettingsBtn.addEventListener('click', () => {
