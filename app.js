@@ -1,43 +1,60 @@
-const bells = new Audio('assets/ring.mp3'); 
-const startBtn = document.querySelector('.btn-start'); 
-const session = document.querySelector('.minutes'); 
-let myInterval; 
-let state = true;
+const bells = new Audio('assets/ring.mp3');
+const startBtn = document.querySelector('.btn-start');
+const pauseBtn = document.querySelector('.btn-pause');
+const resetBtn = document.querySelector('.btn-reset');
+const minuteDiv = document.querySelector('.minutes');
+const secondDiv = document.querySelector('.seconds');
 
-const appTimer = () => {
-    const sessionAmount = Number.parseInt(session.textContent)
-  
-    if(state) {
-      state = false;
-      let totalSeconds = sessionAmount * 60;
-  
-      const updateSeconds = () => {
-        const minuteDiv = document.querySelector('.minutes');
-        const secondDiv = document.querySelector('.seconds');
-      
-        totalSeconds--;
-      
-        let minutesLeft = Math.floor(totalSeconds/60);
-        let secondsLeft = totalSeconds % 60;
-      
-        if(secondsLeft < 10) {
-          secondDiv.textContent = '0' + secondsLeft;
-        } else {
-          secondDiv.textContent = secondsLeft;
-        }
-        minuteDiv.textContent = `${minutesLeft}`
-      
-        if(minutesLeft === 0 && secondsLeft === 0) {
-          bells.play()
-          clearInterval(myInterval);
-        }
-      }
+let totalSeconds = 25 * 60;
+let myInterval = null;
+let isRunning = false;
+let isPaused = false;
 
-      myInterval = setInterval(updateSeconds, 1000);
-    } else {
-      alert('Session has already started.')
-    }
+function updateDisplay() {
+  const minutesLeft = Math.floor(totalSeconds / 60);
+  const secondsLeft = totalSeconds % 60;
+  minuteDiv.textContent = String(minutesLeft).padStart(2, '0');
+  secondDiv.textContent = String(secondsLeft).padStart(2, '0');
+}
+
+function updateSeconds() {
+  if (totalSeconds > 0) {
+    totalSeconds--;
+    updateDisplay();
+  } else {
+    clearInterval(myInterval);
+    bells.play();
+    isRunning = false;
   }
+}
+
+startBtn.addEventListener('click', () => {
+  if (!isRunning) {
+    myInterval = setInterval(updateSeconds, 1000);
+    isRunning = true;
+    isPaused = false;
+  } else if (isPaused) {
+    myInterval = setInterval(updateSeconds, 1000);
+    isPaused = false;
+  } else {
+    alert('Session is already running.');
+  }
+});
+
+pauseBtn.addEventListener('click', () => {
+  if (isRunning && !isPaused) {
+    clearInterval(myInterval);
+    isPaused = true;
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  clearInterval(myInterval);
+  totalSeconds = 25 * 60;
+  updateDisplay();
+  isRunning = false;
+  isPaused = false;
+});
 
 
-  startBtn.addEventListener('click', appTimer);
+updateDisplay();

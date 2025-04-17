@@ -72,36 +72,6 @@ html {
   }
 
 
-  .semi-circle {
-    position: absolute;
-    width: 100px;
-    height: 200px;
-    box-sizing: border-box;
-    border: solid 6px;
-  }
-  
-  .left-side {
-    top: 0;
-    left: 0;
-    transform-origin: right center;
-    transform: rotate(0deg);
-    border-top-left-radius: 100px;
-    border-bottom-left-radius: 100px;
-    border-right: none;
-    z-index: 1;
-  }
-  
-   .right-side {
-    top: 0;
-    left: 100px;
-    transform-origin: left center;
-    transform: rotate(0deg);
-    border-top-right-radius: 100px;
-    border-bottom-right-radius: 100px;
-    border-left: none;
-  }
-
-
   .app-counter-box {
     font-family: 'Droid Sans Mono', monospace;
     font-size: 300%;
@@ -125,3 +95,6 @@ html {
   button:hover {
     color: #854e57;
   }
+
+
+  
